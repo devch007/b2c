@@ -1,0 +1,50 @@
+{
+  "public": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/404.html",
+      "destination": "/404.html"
+    },
+    {
+      "source": "/edubull-theme.css",
+      "destination": "/edubull-theme.css"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/styles.css"
+    },
+    {
+      "source": "/edubull-logo-exact.png",
+      "destination": "/edubull-logo-exact.png"
+    },
+    {
+      "source": "/banner-illustration.png",
+      "destination": "/banner-illustration.png"
+    },
+    {
+      "source": "/dv3/**",
+      "destination": "/dv3/**"
+    },
+    {
+      "source": "/frontend/**",
+      "destination": "/frontend/**"
+    },
+    {
+      "source": "/static/**",
+      "destination": "/static/**"
+    },
+    {
+      "source": "**",
+      "destination": "/404.html"
+    }
+  ]
+}

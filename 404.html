@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Edubull</title>
+  <link rel="icon" type="image/png" href="/edubull-logo-exact.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --yellow: #f59e0b;
+      --yellow-bright: #fbbf24;
+      --coral: #f43f5e;
+      --purple: #8b5cf6;
+      --mint: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', 'Quicksand', 'Nunito', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #e0f2fe 0%, #f0fdfa 55%, #fef3c7 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Kid Background Clouds */
+    .bg-cloud {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 9999px;
+      opacity: 0.8;
+      box-shadow: 0 10px 30px rgba(14, 165, 233, 0.12);
+      animation: floatCloud 8s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cloud-1 {
+      width: 180px;
+      height: 60px;
+      top: 10%;
+      left: 8%;
+      animation-delay: 0s;
+    }
+    .cloud-2 {
+      width: 220px;
+      height: 70px;
+      top: 18%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+    .cloud-3 {
+      width: 140px;
+      height: 50px;
+      bottom: 15%;
+      left: 12%;
+      animation-delay: 4s;
+    }
+    .cloud-4 {
+      width: 190px;
+      height: 65px;
+      bottom: 20%;
+      right: 15%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(-16px) translateX(12px); }
+    }
+
+    /* Main 404 Container Card */
+    .error-card {
+      position: relative;
+      z-index: 10;
+      background: #ffffff;
+      border-radius: 36px;
+      border: 4px solid #bae6fd;
+      box-shadow: 0 20px 50px rgba(14, 165, 233, 0.2), 0 8px 0 #7dd3fc;
+      padding: 45px 35px;
+      max-width: 620px;
+      width: 100%;
+      text-align: center;
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Logo Plate */
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: 9999px;
+      padding: 10px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);
+    }
+    .logo-badge img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Giant 404 Badge */
+    .four-zero-four {
+      font-size: 96px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 35%, #8b5cf6 70%, #f43f5e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      display: inline-block;
+      filter: drop-shadow(0 4px 10px rgba(14, 165, 233, 0.25));
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-2deg) scale(1.02); }
+      75% { transform: rotate(2deg) scale(1.02); }
+    }
+
+    /* Friendly Illustration Character */
+    .character-container {
+      font-size: 64px;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Headings & Text */
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Action Buttons */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: #78350f;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 14px 34px;
+      border-radius: 9999px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45), 0 4px 0 #ca8a04;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-home:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 24px rgba(245, 158, 11, 0.6), 0 5px 0 #ca8a04;
+      color: #451a03;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f9ff;
+      color: #0284c7;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      border: 2px solid #bae6fd;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.15), 0 3px 0 #7dd3fc;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-secondary:hover {
+      background: #e0f2fe;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.25), 0 4px 0 #38bdf8;
+    }
+
+    @media (max-width: 600px) {
+      .four-zero-four { font-size: 72px; }
+      h1 { font-size: 26px; }
+      p { font-size: 15px; }
+      .error-card { padding: 35px 20px; }
+      .btn-home, .btn-secondary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating playful clouds -->
+  <div class="bg-cloud cloud-1"></div>
+  <div class="bg-cloud cloud-2"></div>
+  <div class="bg-cloud cloud-3"></div>
+  <div class="bg-cloud cloud-4"></div>
+
+  <main class="error-card">
+    <div class="logo-badge">
+      <img src="/edubull-logo-exact.png" alt="Edubull Logo">
+    </div>
+
+    <div class="character-container">
+      🚀 ⭐ 🎈
+    </div>
+
+    <div class="four-zero-four">404</div>
+
+    <h1>Oops! We Lost That Page</h1>
+    <p>
+      Looks like this lesson went on a little space adventure! Don't worry, all your fun videos, quizzes, and learning adventures are right at home.
+    </p>
+
+    <div class="button-group">
+      <a href="/" class="btn-home">
+        🏠 Back to Home
+      </a>
+      <a href="/#curriculum" class="btn-secondary">
+        📚 Explore Classes & Videos
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>

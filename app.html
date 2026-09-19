@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edubull AI Learning Platform - Student WebApp</title>
+  <link rel="icon" type="image/png" href="/edubull-logo-exact.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/edubull-theme.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Fredoka', 'Quicksand', 'Nunito', sans-serif;
+      background-color: #f0fdf4;
+      background-image: radial-gradient(#bae6fd 1.2px, transparent 1.2px), radial-gradient(#fde68a 1.2px, #f8fafc 1.2px);
+      background-size: 40px 40px;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* -------------------------------------------------------------
+       1. WEBAPP SIDEBAR (Modern, Collapsible, Kid-Friendly)
+       ------------------------------------------------------------- */
+    .app-sidebar {
+      width: 260px;
+      background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+      border-right: 3px solid #bae6fd;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 16px;
+      box-shadow: 4px 0 20px rgba(14, 165, 233, 0.08);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+      z-index: 100;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e0f2fe;
+    }
+
+    .brand-logo {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .sidebar-nav-group {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0 12px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #475569;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .nav-item-btn:hover {
+      background: #e0f2fe;
+      color: #0284c7;
+      transform: translateX(4px);
+    }
+
+    .nav-item-btn.active {
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.35);
+      border-color: #ffffff;
+    }
+
+    .nav-icon {
+      font-size: 18px;
+    }
+
+    /* Student Profile Widget at bottom of Sidebar */
+    .sidebar-user-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 2px solid #bae6fd;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border: 2px solid #ffffff;
+    }
+
+    .user-info-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .user-info-status {
+      font-size: 12px;
+      font-weight: 600;
+      color: #10b981;
+    }
+
+    /* -------------------------------------------------------------
+       2. MAIN CONTENT AREA & TOPBAR
+       ------------------------------------------------------------- */
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      min-width: 0;
+    }
+
+    .app-topbar {
+      background: #ffffff;
+      border-bottom: 2px solid #bae6fd;
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      gap: 16px;
+    }
+
+    .topbar-search-box {
+      position: relative;
+      width: 380px;
+      max-width: 100%;
+    }
+
+    .topbar-search-input {
+      width: 100%;
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: 9999px;
+      padding: 8px 18px 8px 40px;
+      font-family: 'Fredoka', 'Quicksand', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .topbar-search-input:focus {
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .search-icon-fixed {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #64748b;
+      pointer-events: none;
+    }
+
+    .topbar-stats-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-pill {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .stat-pill.smartscore {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #b45309;
+    }
+    .stat-pill.streak {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #dc2626;
+    }
+
+    /* -------------------------------------------------------------
+       3. WORKSPACE: CURRICULUM + INTERACTIVE PRACTICE ENGINE
+       ------------------------------------------------------------- */
+    .app-workspace {
+      padding: 24px 28px 60px;
+      display: flex;
+      gap: 24px;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Left Grade Selector Bar inside WebApp */
+    .webapp-grade-ribbon {
+      width: 58px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: sticky;
+      top: 90px;
+      height: fit-content;
+      flex-shrink: 0;
+    }
+
+    .grade-chip {
+      height: 38px;
+      border-radius: 12px 0 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: -2px 2px 6px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-right: none;
+      cursor: pointer;
+    }
+    .grade-chip:hover {
+      width: 66px;
+      transform: translateX(-8px);
+    }
+    .grade-chip.active {
+      width: 72px;
+      transform: translateX(-14px);
+      box-shadow: -4px 6px 14px rgba(0,0,0,0.2);
+    }
+
+    /* Grade Candy Colors */
+    .g-lkg { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .g-ukg { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+    .g-1   { background: linear-gradient(135deg, #34d399, #10b981); }
+    .g-2   { background: linear-gradient(135deg, #fb7185, #f43f5e); }
+    .g-3   { background: linear-gradient(135deg, #818cf8, #6366f1); }
+    .g-4   { background: linear-gradient(135deg, #c084fc, #a855f7); }
+    .g-5   { background: linear-gradient(135deg, #2dd4bf, #14b8a6); }
+    .g-6   { background: linear-gradient(135deg, #fb923c, #ea580c); }
+    .g-7   { background: linear-gradient(135deg, #f472b6, #db2777); }
+    .g-8   { background: linear-gradient(135deg, #a3e635, #65a30d); }
+    .g-9   { background: linear-gradient(135deg, #38bdf8, #0369a1); }
+    .g-10  { background: linear-gradient(135deg, #e879f9, #c026d3); }
+    .g-11  { background: linear-gradient(135deg, #f87171, #dc2626); }
+    .g-12  { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+
+    /* Main Center Workspace */
+    .workspace-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    /* Class Overview Hero Banner */
+    .class-hero-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border: 3.5px solid #bae6fd;
+      border-radius: 28px;
+      padding: 24px 28px;
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.12), 0 5px 0 #7dd3fc;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .class-title-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .grade-badge-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18), 0 3px 0 rgba(0,0,0,0.1);
+      border: 2.5px solid #ffffff;
+      transform: rotate(-3deg);
+      flex-shrink: 0;
+    }
+
+    .class-main-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0369a1;
+      letter-spacing: -0.5px;
+    }
+
+    .skills-counter-badge {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      color: #15803d;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+    }
+
+    .class-intro-text {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #475569;
+      max-width: 950px;
+    }
+
+    /* -----------------------------------------
+       5. CATEGORIES & SKILL CARDS GRID
+       ----------------------------------------- */
+    .curriculum-grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 1200px) {
+      .curriculum-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .curriculum-grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .category-card {
+      background: #ffffff;
+      border-radius: 22px;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(100, 116, 139, 0.07), 0 4px 0 #cbd5e1;
+      padding: 20px;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.16), 0 6px 0 #38bdf8;
+      border-color: #38bdf8;
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .cat-icon-pill {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+      flex-shrink: 0;
+    }
+
+    .cat-title-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .skill-items-container {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skill-entry {
+      border-radius: 12px;
+      padding: 7px 10px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+    }
+
+    .skill-entry:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      transform: translateX(4px);
+    }
+
+    .skill-code-tag {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 12.5px;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 2px 7px;
+      border-radius: 6px;
+      min-width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .skill-name-link {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #334155;
+      text-decoration: none;
+      line-height: 1.4;
+      flex: 1;
+      transition: color 0.15s ease;
+    }
+
+    .skill-entry:hover .skill-name-link {
+      color: #0284c7;
+    }
+
+    .skill-play-icon {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #94a3b8;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+      background: #e0f2fe;
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: #0284c7;
+    }
+
+    .skill-entry:hover .skill-play-icon {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Interactive Practice Modal / Arena */
+    .practice-arena {
+      display: none;
+      background: #ffffff;
+      border-radius: 26px;
+      border: 3.5px solid #38bdf8;
+      box-shadow: 0 18px 40px rgba(14, 165, 233, 0.16), 0 6px 0 #0284c7;
+      padding: 30px;
+      animation: fadeIn 0.3s ease;
+    }
+    .practice-arena.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .practice-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    .practice-skill-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close-practice {
+      background: #f1f5f9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 800;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-close-practice:hover {
+      background: #fee2e2;
+      color: #ef4444;
+    }
+
+    .question-box {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      background: #f8fafc;
+      padding: 18px 24px;
+      border-radius: 18px;
+      border-left: 6px solid #38bdf8;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .option-btn {
+      background: #ffffff;
+      border: 3px solid #bae6fd;
+      border-radius: 18px;
+      padding: 16px 20px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08), 0 3px 0 #7dd3fc;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+    }
+    .option-btn:hover {
+      transform: translateY(-3px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2), 0 4px 0 #0284c7;
+      background: #f0f9ff;
+    }
+    .option-btn.selected {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0284c7;
+    }
+    .option-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.25), 0 3px 0 #16a34a !important;
+    }
+    .option-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    .practice-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .btn-submit-answer {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      border: 2px solid #ffffff;
+      border-radius: 9999px;
+      padding: 12px 36px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35), 0 4px 0 #047857;
+      transition: all 0.2s;
+    }
+    .btn-submit-answer:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.5), 0 5px 0 #065f46;
+    }
+
+    .feedback-banner {
+      display: none;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+    .feedback-banner.success {
+      display: block;
+      background: #dcfce7;
+      border: 2px solid #86efac;
+      color: #166534;
+    }
+    .feedback-banner.error {
+      display: block;
+      background: #fee2e2;
+      border: 2px solid #fca5a5;
+      color: #991b1b;
+    }
+
+    /* -------------------------------------------------------------
+       4. RESPONSIVE WEBAPP MOBILE STYLES
+       ------------------------------------------------------------- */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .app-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 2px solid #bae6fd;
+        padding: 12px 16px;
+      }
+      .sidebar-nav-group {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-top: 10px;
+      }
+      .sidebar-user-card {
+        display: none;
+      }
+      .app-workspace {
+        flex-direction: column;
+        padding: 14px 12px 40px;
+      }
+      .webapp-grade-ribbon {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        position: static;
+        padding-bottom: 8px;
+      }
+      .grade-chip {
+        min-width: 48px;
+        border-radius: 10px;
+        border-right: 2px solid rgba(255,255,255,0.4);
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WebApp Modern Sidebar -->
+  <aside class="app-sidebar">
+    <div>
+      <div class="sidebar-brand">
+        <a href="/">
+          <img src="/edubull-logo-exact.png" alt="Edubull Logo" class="brand-logo">
+        </a>
+      </div>
+
+      <div class="sidebar-nav-group">
+        <div class="sidebar-label">Learning Arena</div>
+        <a href="/app.html" class="nav-item-btn active">
+          <span class="nav-icon">🎒</span> Classes & Skills
+        </a>
+        <a href="/class.html?grade=class-1" class="nav-item-btn">
+          <span class="nav-icon">📐</span> Maths Practice
+        </a>
+        <a href="/class.html?grade=class-1" class="nav-item-btn">
+          <span class="nav-icon">📖</span> English Practice
+        </a>
+        <a href="/#analytics" class="nav-item-btn">
+          <span class="nav-icon">📊</span> Smart Analytics
+        </a>
+        <a href="/#awards" class="nav-item-btn">
+          <span class="nav-icon">🏆</span> Awards & Badges
+        </a>
+      </div>
+    </div>
+
+    <!-- Student Profile Widget -->
+    <div class="sidebar-user-card">
+      <div class="user-avatar">🧑‍🎓</div>
+      <div>
+        <div class="user-info-name">Demo Student</div>
+        <div class="user-info-status">🟢 AI Active • Score 850</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main WebApp Container -->
+  <main class="app-main">
+    <!-- Topbar with Search & Live Stats -->
+    <header class="app-topbar">
+      <div class="topbar-search-box">
+        <span class="search-icon-fixed">🔍</span>
+        <input type="text" id="globalSkillSearch" class="topbar-search-input" placeholder="Search across all 4,500+ topics..." autocomplete="off">
+      </div>
+
+      <div class="topbar-stats-group">
+        <div class="stat-pill smartscore">
+          <span>🎯</span> SmartScore: <strong id="studentScore">850</strong>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <strong>5 Day</strong> Streak
+        </div>
+        <a href="/signup.html" class="btn-top-join" style="padding: 6px 16px; border-radius: 9999px; background: #fbbf24; color: #78350f; font-weight: 800; text-decoration: none;">Upgrade PRO</a>
+      </div>
+    </header>
+
+    <!-- Interactive Workspace -->
+    <div class="app-workspace">
+      <!-- Left Grade Switcher Ribbon (LKG - 12) -->
+      <aside class="webapp-grade-ribbon" id="gradeChipsRibbon">
+        <div class="grade-chip g-lkg" data-grade="lkg">L</div>
+        <div class="grade-chip g-ukg" data-grade="ukg">U</div>
+        <div class="grade-chip g-1 active" data-grade="class-1">I</div>
+        <div class="grade-chip g-2" data-grade="class-2">II</div>
+        <div class="grade-chip g-3" data-grade="class-3">III</div>
+        <div class="grade-chip g-4" data-grade="class-4">IV</div>
+        <div class="grade-chip g-5" data-grade="class-5">V</div>
+        <div class="grade-chip g-6" data-grade="class-6">VI</div>
+        <div class="grade-chip g-7" data-grade="class-7">VII</div>
+        <div class="grade-chip g-8" data-grade="class-8">VIII</div>
+        <div class="grade-chip g-9" data-grade="class-9">IX</div>
+        <div class="grade-chip g-10" data-grade="class-10">X</div>
+        <div class="grade-chip g-11" data-grade="class-11">XI</div>
+        <div class="grade-chip g-12" data-grade="class-12">XII</div>
+      </aside>
+
+      <!-- Center Workspace Area -->
+      <section class="workspace-content">
+        <!-- Interactive Practice Question Arena (Opens when clicking any skill) -->
+        <div class="practice-arena" id="practiceArena">
+          <div class="practice-header">
+            <h3 class="practice-skill-title">
+              <span>🚀</span> <span id="practiceSkillName">Skill Practice</span>
+            </h3>
+            <button class="btn-close-practice" id="btnClosePractice" title="Back to curriculum">✕</button>
+          </div>
+
+          <div class="feedback-banner" id="feedbackBanner"></div>
+
+          <div class="question-box" id="questionPrompt">
+            Loading question...
+          </div>
+
+          <div class="options-grid" id="optionsGrid">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <div class="practice-footer">
+            <span style="font-size: 14px; font-weight: 700; color: #64748b;">
+              💡 <em>Answer correctly to boost your SmartScore!</em>
+            </span>
+            <button class="btn-submit-answer" id="btnSubmitAnswer">Submit Answer ✨</button>
+          </div>
+        </div>
+
+        <!-- Curriculum Hero Card -->
+        <div class="class-hero-card" id="curriculumHeroCard">
+          <div class="hero-top-row">
+            <div class="class-title-badge-group">
+              <div class="grade-badge-circle g-1" id="heroBadge">I</div>
+              <h1 class="class-main-title" id="classMainTitle">Class I Maths</h1>
+            </div>
+            <div class="skills-counter-badge" id="skillsCount">
+              <span>✨</span> <strong id="skillsCountNum">120+</strong> Interactive Skills
+            </div>
+          </div>
+          <p class="class-intro-text" id="classDescription">
+            Click any interactive skill below to immediately launch real-time AI practice and questions!
+          </p>
+        </div>
+
+        <!-- Categories & Skills Grid Container -->
+        <div class="curriculum-grid-container" id="curriculumGrid">
+          <!-- Dynamically populated from /api/v1/curriculum/:grade -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- WebApp Core Module Script -->
+  <script type="module">
+    import { apiClient } from '/js/api/client.js';
+
+    let currentGrade = 'class-1';
+    let currentSkillId = 'A.1';
+    let currentQuestion = null;
+    let selectedAnswer = null;
+    let studentScore = 850;
+
+    const GRADE_COLORS = {
+      'lkg': 'g-lkg', 'ukg': 'g-ukg',
+      'class-1': 'g-1', 'class-2': 'g-2', 'class-3': 'g-3', 'class-4': 'g-4',
+      'class-5': 'g-5', 'class-6': 'g-6', 'class-7': 'g-7', 'class-8': 'g-8',
+      'class-9': 'g-9', 'class-10': 'g-10', 'class-11': 'g-11', 'class-12': 'g-12'
+    };
+
+    // 1. Fetch Curriculum from REST API
+    async function loadCurriculum(gradeKey) {
+      try {
+        const res = await apiClient.get(`/curriculum/${gradeKey}`);
+        const data = res.data || res;
+
+        document.getElementById('classMainTitle').textContent = data.title || `${data.name} Maths`;
+        document.getElementById('classDescription').textContent = data.description || '';
+        document.getElementById('heroBadge').textContent = data.badge || 'I';
+        document.getElementById('heroBadge').className = `grade-badge-circle ${GRADE_COLORS[gradeKey] || 'g-1'}`;
+
+        const grid = document.getElementById('curriculumGrid');
+        grid.innerHTML = (data.categories || []).map((cat, idx) => `
+          <div class="category-card">
+            <div class="cat-header">
+              <div class="cat-icon-pill">${cat.icon || '🎯'}</div>
+              <h2 class="cat-title-text">${cat.name}</h2>
+            </div>
+            <ul class="skill-items-container">
+              ${(cat.skills || []).map(skill => `
+                <li class="skill-entry" data-skill-id="${skill.id}" data-skill-name="${skill.name}">
+                  <span class="skill-code-tag">${skill.id}</span>
+                  <span class="skill-name-link">${skill.name}</span>
+                  <span class="skill-play-icon">▶ Practice</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `).join('');
+
+        // Attach click listener to each skill to launch Practice Engine
+        document.querySelectorAll('.skill-entry').forEach(entry => {
+          entry.addEventListener('click', () => {
+            const skillId = entry.dataset.skillId;
+            const skillName = entry.dataset.skillName;
+            launchPractice(skillId, skillName);
+          });
+        });
+
+      } catch (err) {
+        console.error('Failed to load curriculum from API:', err);
+      }
+    }
+
+    // 2. Launch Interactive Practice Question Engine
+    async function launchPractice(skillId, skillName) {
+      currentSkillId = skillId;
+      document.getElementById('practiceSkillName').textContent = `${skillId} - ${skillName}`;
+      
+      const arena = document.getElementById('practiceArena');
+      arena.classList.add('active');
+      arena.scrollIntoView({ behavior: 'smooth' });
+
+      // Reset feedback
+      const feedback = document.getElementById('feedbackBanner');
+      feedback.className = 'feedback-banner';
+      feedback.style.display = 'none';
+
+      try {
+        const res = await apiClient.get(`/practice/${skillId}`);
+        const questions = res.questions || [];
+        currentQuestion = questions[0] || {
+          id: 'q-demo',
+          question: `Sample problem for ${skillName}: What is 4 + 4?`,
+          options: ['6', '7', '8', '9'],
+          correctAnswer: '8',
+          explanation: '4 + 4 = 8.'
+        };
+
+        renderQuestion(currentQuestion);
+      } catch (err) {
+        console.error('Practice load error:', err);
+      }
+    }
+
+    function renderQuestion(q) {
+      document.getElementById('questionPrompt').textContent = q.question;
+      selectedAnswer = null;
+
+      const optionsGrid = document.getElementById('optionsGrid');
+      optionsGrid.innerHTML = (q.options || []).map(opt => `
+        <button class="option-btn" data-val="${opt}">${opt}</button>
+      `).join('');
+
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedAnswer = btn.dataset.val;
+        });
+      });
+    }
+
+    // 3. Submit Answer to Backend API
+    document.getElementById('btnSubmitAnswer').addEventListener('click', async () => {
+      if (!selectedAnswer) {
+        alert('Please choose an answer first! 😊');
+        return;
+      }
+
+      try {
+        const res = await apiClient.post('/practice/submit', {
+          skillId: currentSkillId,
+          questionId: currentQuestion ? currentQuestion.id : 'q-101',
+          selectedAnswer: selectedAnswer
+        });
+
+        const feedback = document.getElementById('feedbackBanner');
+        if (res.isCorrect) {
+          studentScore += res.pointsEarned || 10;
+          document.getElementById('studentScore').textContent = studentScore;
+          feedback.className = 'feedback-banner success';
+          feedback.innerHTML = `🎉 <strong>Excellent Job!</strong> That is correct! (+${res.pointsEarned} points)`;
+          
+          // Highlight correct option
+          document.querySelectorAll('.option-btn').forEach(b => {
+            if (b.dataset.val === selectedAnswer) b.classList.add('correct');
+          });
+        } else {
+          feedback.className = 'feedback-banner error';
+          feedback.innerHTML = `❌ <strong>Not quite!</strong> The correct answer is <strong>${res.correctAnswer}</strong>. <br><small>${res.explanation}</small>`;
+          
+          document.querySelectorAll('.option-btn').forEach(b => {
+            if (b.dataset.val === selectedAnswer) b.classList.add('wrong');
+            if (b.dataset.val === res.correctAnswer) b.classList.add('correct');
+          });
+        }
+        feedback.style.display = 'block';
+      } catch (err) {
+        console.error('Submit error:', err);
+      }
+    });
+
+    document.getElementById('btnClosePractice').addEventListener('click', () => {
+      document.getElementById('practiceArena').classList.remove('active');
+    });
+
+    // 4. Grade Ribbon Switcher
+    document.querySelectorAll('.grade-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.grade-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentGrade = chip.dataset.grade;
+        loadCurriculum(currentGrade);
+      });
+    });
+
+    // 5. Global Search
+    const searchInput = document.getElementById('globalSkillSearch');
+    searchInput.addEventListener('input', async (e) => {
+      const q = e.target.value.trim();
+      if (q.length > 1) {
+        try {
+          const res = await apiClient.get('/search', { q });
+          console.log('[Search Results]', res.data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    });
+
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramGrade = urlParams.get('grade') || 'class-1';
+    const paramSkill = urlParams.get('skill');
+    const paramName = urlParams.get('name');
+
+    currentGrade = paramGrade.toLowerCase();
+
+    // Setup active grade chip
+    document.querySelectorAll('.grade-chip').forEach(chip => {
+      if (chip.dataset.grade === currentGrade) {
+        chip.classList.add('active');
+      } else {
+        chip.classList.remove('active');
+      }
+    });
+
+    // Initial load
+    await loadCurriculum(currentGrade);
+
+    if (paramSkill) {
+      launchPractice(paramSkill, paramName || paramSkill);
+    }
+  </script>
+</body>
+</html>

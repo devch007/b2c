@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edubull Curriculum & Practice - AI Enabled Personalised Learning</title>
+  <link rel="icon" type="image/png" href="/edubull-logo-exact.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/edubull-theme.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f0fdf4;
+      background-image: radial-gradient(#bae6fd 1.2px, transparent 1.2px), radial-gradient(#fde68a 1.2px, #f8fafc 1.2px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* -----------------------------------------
+       1. TOP NAVIGATION BAR (Playful Sky Blue)
+       ----------------------------------------- */
+    .curriculum-navbar {
+      background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
+      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-brand-logo {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-brand-logo:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link-btn {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+    }
+    .nav-link-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fef08a;
+    }
+
+    .btn-auth-signin {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      border-radius: 9999px;
+      padding: 7px 18px;
+      font-size: 14.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-auth-signin:hover {
+      background: #ffffff;
+      color: #0284c7;
+      transform: translateY(-2px);
+    }
+
+    .btn-auth-join {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      border: 2px solid #ffffff;
+      color: #78350f;
+      border-radius: 9999px;
+      padding: 7px 20px;
+      font-size: 14.5px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35), 0 2px 0 #b45309;
+      transition: all 0.2s ease;
+    }
+    .btn-auth-join:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.5), 0 3px 0 #92400e;
+    }
+
+    /* -----------------------------------------
+       2. SUBHEADER FILTER BAR
+       ----------------------------------------- */
+    .filter-subbar {
+      background: #e0f2fe;
+      border-bottom: 2px solid #bae6fd;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .view-switcher {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    .switcher-pill {
+      background: #ffffff;
+      color: #0284c7;
+      border: 2px solid #bae6fd;
+      padding: 5px 16px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .switcher-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+    }
+    .switcher-pill:hover:not(.active) {
+      background: #f0f9ff;
+      border-color: #38bdf8;
+    }
+
+    .curriculum-search-box {
+      position: relative;
+      width: 280px;
+      max-width: 100%;
+    }
+
+    .curriculum-search-input {
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid #bae6fd;
+      border-radius: 9999px;
+      padding: 7px 16px 7px 36px;
+      font-family: 'Fredoka', 'Quicksand', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .curriculum-search-input:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .search-icon-inside {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #64748b;
+      pointer-events: none;
+    }
+
+    /* -----------------------------------------
+       3. MAIN CONTAINER & SIDEBAR LAYOUT
+       ----------------------------------------- */
+    .page-wrapper {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      display: flex;
+      gap: 22px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Sticky Grade Ribbon Sidebar */
+    .grade-ribbon-sidebar {
+      width: 64px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: sticky;
+      top: 130px;
+      height: fit-content;
+      z-index: 50;
+    }
+
+    .ribbon-tab {
+      height: 40px;
+      border-radius: 14px 0 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: -2px 3px 8px rgba(0,0,0,0.12);
+      position: relative;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-right: none;
+    }
+
+    .ribbon-tab:hover {
+      width: 72px;
+      transform: translateX(-8px);
+      box-shadow: -4px 6px 14px rgba(0,0,0,0.2);
+    }
+
+    .ribbon-tab.active {
+      width: 78px;
+      transform: translateX(-14px);
+      font-size: 16px;
+      border-color: #ffffff;
+      box-shadow: -6px 8px 18px rgba(0,0,0,0.25);
+    }
+
+    .ribbon-tab.active::after {
+      content: '★';
+      position: absolute;
+      right: 6px;
+      font-size: 10px;
+      color: #fef08a;
+    }
+
+    /* Grade Candy Colors */
+    .g-lkg { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .g-ukg { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+    .g-1   { background: linear-gradient(135deg, #34d399, #10b981); }
+    .g-2   { background: linear-gradient(135deg, #fb7185, #f43f5e); }
+    .g-3   { background: linear-gradient(135deg, #818cf8, #6366f1); }
+    .g-4   { background: linear-gradient(135deg, #c084fc, #a855f7); }
+    .g-5   { background: linear-gradient(135deg, #2dd4bf, #14b8a6); }
+    .g-6   { background: linear-gradient(135deg, #fb923c, #ea580c); }
+    .g-7   { background: linear-gradient(135deg, #f472b6, #db2777); }
+    .g-8   { background: linear-gradient(135deg, #a3e635, #65a30d); }
+    .g-9   { background: linear-gradient(135deg, #38bdf8, #0369a1); }
+    .g-10  { background: linear-gradient(135deg, #e879f9, #c026d3); }
+    .g-11  { background: linear-gradient(135deg, #f87171, #dc2626); }
+    .g-12  { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+
+    /* -----------------------------------------
+       4. CONTENT CANVAS & HERO CARD
+       ----------------------------------------- */
+    .content-canvas {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    /* Class Overview Hero Banner */
+    .class-hero-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border: 3.5px solid #bae6fd;
+      border-radius: 28px;
+      padding: 28px 32px;
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.12), 0 5px 0 #7dd3fc;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .class-hero-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .class-title-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .grade-badge-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18), 0 3px 0 rgba(0,0,0,0.1);
+      border: 2.5px solid #ffffff;
+      transform: rotate(-3deg);
+    }
+
+    .class-main-title {
+      font-size: 34px;
+      font-weight: 800;
+      color: #0369a1;
+      letter-spacing: -0.5px;
+    }
+
+    .skills-counter-badge {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      color: #15803d;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+    }
+
+    .class-intro-text {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #475569;
+      max-width: 950px;
+    }
+
+    /* -----------------------------------------
+       5. CATEGORIES & SKILL CARDS GRID (Aesthetic Modern)
+       ----------------------------------------- */
+    .curriculum-grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .category-card {
+      background: #ffffff;
+      border-radius: 22px;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(100, 116, 139, 0.07), 0 4px 0 #cbd5e1;
+      padding: 22px;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.16), 0 6px 0 #38bdf8;
+      border-color: #38bdf8;
+    }
+
+    /* Category Header with playful candy accent pill */
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .cat-icon-pill {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+      flex-shrink: 0;
+    }
+
+    .cat-title-text {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .skill-entry {
+      border-radius: 12px;
+      padding: 6px 10px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1.5px solid transparent;
+    }
+
+    .skill-entry:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      transform: translateX(4px);
+    }
+
+    .skill-code-tag {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 2px 7px;
+      border-radius: 6px;
+      min-width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .skill-name-link {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #334155;
+      text-decoration: none;
+      line-height: 1.4;
+      flex: 1;
+      transition: color 0.15s ease;
+    }
+
+    .skill-entry:hover .skill-name-link {
+      color: #0284c7;
+    }
+
+    .skill-play-icon {
+      font-size: 12px;
+      color: #94a3b8;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+    }
+
+    .skill-entry:hover .skill-play-icon {
+      opacity: 1;
+      transform: translateX(0);
+      color: #0ea5e9;
+    }
+
+    /* -----------------------------------------
+       6. MODERN FLOATING CALL TO ACTION BAR
+       ----------------------------------------- */
+    .curriculum-bottom-cta {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+      border-radius: 24px;
+      padding: 24px 32px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.3), 0 5px 0 #075985;
+      border: 3px solid #7dd3fc;
+      margin-top: 10px;
+    }
+
+    .cta-heading {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .cta-subheading {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #e0f2fe;
+    }
+
+    .cta-button-gold {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: #78350f;
+      font-family: 'Fredoka', 'Quicksand', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      padding: 13px 32px;
+      border-radius: 9999px;
+      text-decoration: none;
+      border: 3px solid #ffffff;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45), 0 4px 0 #b45309;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: inline-block;
+    }
+    .cta-button-gold:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 14px 30px rgba(245, 158, 11, 0.6), 0 5px 0 #92400e;
+    }
+
+    /* -----------------------------------------
+       7. FULL RESPONSIVENESS (MOBILE / TABLET)
+       ----------------------------------------- */
+    @media (max-width: 1100px) {
+      .curriculum-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .curriculum-navbar {
+        padding: 8px 14px;
+        flex-wrap: wrap;
+      }
+      .nav-brand-logo {
+        height: 36px;
+      }
+      .nav-actions {
+        gap: 8px;
+      }
+      .btn-auth-signin, .btn-auth-join {
+        padding: 5px 12px;
+        font-size: 12.5px;
+      }
+
+      .filter-subbar {
+        padding: 8px 14px;
+      }
+      .curriculum-search-box {
+        width: 100%;
+      }
+
+      .page-wrapper {
+        flex-direction: column;
+        padding: 12px 10px 40px;
+        gap: 14px;
+      }
+
+      /* Horizontal Scrolling Pill Ribbon on Mobile */
+      .grade-ribbon-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        position: static;
+        padding: 4px 2px 12px;
+        scrollbar-width: none;
+      }
+      .grade-ribbon-sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .ribbon-tab {
+        border-radius: 12px;
+        border-right: 2px solid rgba(255, 255, 255, 0.4);
+        min-width: 48px;
+        height: 38px;
+        font-size: 13.5px;
+      }
+      .ribbon-tab:hover, .ribbon-tab.active {
+        width: auto;
+        min-width: 54px;
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      .ribbon-tab.active::after {
+        display: none;
+      }
+
+      .class-hero-card {
+        padding: 18px 18px;
+        border-radius: 20px;
+      }
+      .class-main-title {
+        font-size: 24px;
+      }
+      .grade-badge-circle {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        border-radius: 14px;
+      }
+      .class-intro-text {
+        font-size: 14px;
+      }
+
+      .curriculum-grid-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .category-card {
+        padding: 16px;
+        border-radius: 18px;
+      }
+
+      .curriculum-bottom-cta {
+        padding: 20px;
+        border-radius: 20px;
+        text-align: center;
+        justify-content: center;
+      }
+      .cta-heading {
+        font-size: 20px;
+      }
+      .cta-button-gold {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="curriculum-navbar">
+    <div class="nav-brand-container">
+      <a href="/">
+        <img src="/edubull-logo-exact.png" alt="Edubull Logo" class="nav-brand-logo">
+      </a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="/app.html" class="nav-link-btn" style="background: rgba(255,255,255,0.25); border: 1.5px solid #ffffff;">🚀 Practice Arena</a>
+      <a href="/" class="nav-link-btn">Learning</a>
+      <a href="/#analytics" class="nav-link-btn">Analytics</a>
+      <a href="/login.html" class="btn-auth-signin">Sign In</a>
+      <a href="/signup.html" class="btn-auth-join">Join Now</a>
+    </div>
+  </header>
+
+  <!-- Subheader Filter & Search Bar -->
+  <div class="filter-subbar">
+    <div class="view-switcher">
+      <span>View By:</span>
+      <a href="#" class="switcher-pill active">
+        <span>🎒</span> Classes
+      </a>
+      <a href="/#topics" class="switcher-pill">
+        <span>📚</span> Topics
+      </a>
+    </div>
+
+    <!-- Live Quick Search inside current class curriculum -->
+    <div class="curriculum-search-box">
+      <span class="search-icon-inside">🔍</span>
+      <input type="text" id="curriculumSearchInput" class="curriculum-search-input" placeholder="Search skills in this class..." autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Page Layout Wrapper -->
+  <div class="page-wrapper">
+    <!-- Left Sticky Sidebar with Grade Badges (LKG, UKG, I - XII) -->
+    <aside class="grade-ribbon-sidebar" id="gradeSidebar">
+      <a href="/class.html?grade=lkg" class="ribbon-tab g-lkg" data-grade="lkg" title="LKG">L</a>
+      <a href="/class.html?grade=ukg" class="ribbon-tab g-ukg" data-grade="ukg" title="UKG">U</a>
+      <a href="/class.html?grade=class-1" class="ribbon-tab g-1" data-grade="class-1" title="Class 1">I</a>
+      <a href="/class.html?grade=class-2" class="ribbon-tab g-2" data-grade="class-2" title="Class 2">II</a>
+      <a href="/class.html?grade=class-3" class="ribbon-tab g-3" data-grade="class-3" title="Class 3">III</a>
+      <a href="/class.html?grade=class-4" class="ribbon-tab g-4" data-grade="class-4" title="Class 4">IV</a>
+      <a href="/class.html?grade=class-5" class="ribbon-tab g-5" data-grade="class-5" title="Class 5">V</a>
+      <a href="/class.html?grade=class-6" class="ribbon-tab g-6" data-grade="class-6" title="Class 6">VI</a>
+      <a href="/class.html?grade=class-7" class="ribbon-tab g-7" data-grade="class-7" title="Class 7">VII</a>
+      <a href="/class.html?grade=class-8" class="ribbon-tab g-8" data-grade="class-8" title="Class 8">VIII</a>
+      <a href="/class.html?grade=class-9" class="ribbon-tab g-9" data-grade="class-9" title="Class 9">IX</a>
+      <a href="/class.html?grade=class-10" class="ribbon-tab g-10" data-grade="class-10" title="Class 10">X</a>
+      <a href="/class.html?grade=class-11" class="ribbon-tab g-11" data-grade="class-11" title="Class 11">XI</a>
+      <a href="/class.html?grade=class-12" class="ribbon-tab g-12" data-grade="class-12" title="Class 12">XII</a>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="content-canvas">
+      <!-- Overview Hero Card -->
+      <section class="class-hero-card">
+        <div class="hero-top-row">
+          <div class="class-title-badge-group">
+            <div class="grade-badge-circle g-1" id="heroGradeBadge">I</div>
+            <h1 class="class-main-title" id="classTitle">Class I Maths</h1>
+          </div>
+          <div class="skills-counter-badge" id="skillsCountBadge">
+            <span>✨</span> <strong id="skillsCountNum">120+</strong> Interactive Skills
+          </div>
+        </div>
+        <p class="class-intro-text" id="classDesc">
+          Here is a list of all of the maths skills students learn in class I! These skills are organised into categories, and you can move your mouse over any skill name to preview the skill. To start practising, just click on any link. Edubull will track your score, and the questions will automatically increase in difficulty as you improve!
+        </p>
+      </section>
+
+      <!-- Dynamic Categories & Skills Grid -->
+      <section class="curriculum-grid-container" id="categoriesGrid">
+        <!-- Rendered dynamically -->
+      </section>
+
+      <!-- Bottom Membership Promotion Banner -->
+      <section class="curriculum-bottom-cta">
+        <div>
+          <h2 class="cta-heading">Ready to master these skills? 🚀</h2>
+          <p class="cta-subheading">Get unlimited practice, AI-powered insights, and certificates of achievement!</p>
+        </div>
+        <a href="/signup.html" class="cta-button-gold">Start Practising Today →</a>
+      </section>
+    </main>
+  </div>
+
+  <!-- Dynamic Logic & Module Integration -->
+  <script type="module">
+    import { curriculumApi } from '/js/api/curriculum.api.js';
+
+    // Grade to roman badge mapping
+    const GRADE_BADGE_MAP = {
+      'lkg': 'L', 'ukg': 'U',
+      'class-1': 'I', 'class-2': 'II', 'class-3': 'III', 'class-4': 'IV',
+      'class-5': 'V', 'class-6': 'VI', 'class-7': 'VII', 'class-8': 'VIII',
+      'class-9': 'IX', 'class-10': 'X', 'class-11': 'XI', 'class-12': 'XII'
+    };
+
+    const GRADE_CLASS_COLOR_MAP = {
+      'lkg': 'g-lkg', 'ukg': 'g-ukg',
+      'class-1': 'g-1', 'class-2': 'g-2', 'class-3': 'g-3', 'class-4': 'g-4',
+      'class-5': 'g-5', 'class-6': 'g-6', 'class-7': 'g-7', 'class-8': 'g-8',
+      'class-9': 'g-9', 'class-10': 'g-10', 'class-11': 'g-11', 'class-12': 'g-12'
+    };
+
+    // Category emoji decorator
+    const CATEGORY_EMOJIS = ['🎯', '💡', '🚀', '⭐', '🧩', '🎲', '📊', '📐', '🔮', '🌟', '🏆', '🎉'];
+
+    // Read query parameter
+    const params = new URLSearchParams(window.location.search);
+    const rawGrade = params.get('grade') || 'class-1';
+    const activeGrade = rawGrade.toLowerCase();
+
+    // Setup active tab in sidebar
+    document.querySelectorAll('.ribbon-tab').forEach(tab => {
+      if (tab.dataset.grade === activeGrade) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+
+    // Update Hero badge
+    const badgeEl = document.getElementById('heroGradeBadge');
+    badgeEl.textContent = GRADE_BADGE_MAP[activeGrade] || 'I';
+    badgeEl.className = `grade-badge-circle ${GRADE_CLASS_COLOR_MAP[activeGrade] || 'g-1'}`;
+
+    let allLoadedCategories = [];
+
+    async function loadCurriculumData(grade) {
+      try {
+        const data = await curriculumApi.getClassSkills(grade);
+        
+        document.getElementById('classTitle').textContent = data.title || `${data.name} Maths`;
+        document.getElementById('classDesc').textContent = data.description || '';
+
+        allLoadedCategories = data.categories || [];
+
+        // Count total skills
+        let totalSkills = 0;
+        allLoadedCategories.forEach(cat => {
+          totalSkills += (cat.skills || []).length;
+        });
+        document.getElementById('skillsCountNum').textContent = `${totalSkills}+`;
+
+        renderGrid(allLoadedCategories);
+      } catch (err) {
+        console.error('Error loading curriculum data:', err);
+      }
+    }
+
+    function renderGrid(categories) {
+      const grid = document.getElementById('categoriesGrid');
+      if (!categories || categories.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #fff; border-radius: 20px; border: 2px dashed #cbd5e1;">
+            <p style="font-size: 18px; font-weight: 700; color: #64748b;">No skills match your search query.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = categories.map((cat, idx) => {
+        const emoji = CATEGORY_EMOJIS[idx % CATEGORY_EMOJIS.length];
+        return `
+          <div class="category-card">
+            <div class="cat-header">
+              <div class="cat-icon-pill">${emoji}</div>
+              <h2 class="cat-title-text">${cat.name}</h2>
+            </div>
+            <ul class="skill-items-container">
+              ${(cat.skills || []).map(skill => `
+                <li class="skill-entry">
+                  <span class="skill-code-tag">${skill.id}</span>
+                  <a href="/app.html?grade=${encodeURIComponent(activeGrade)}&skill=${encodeURIComponent(skill.id)}&name=${encodeURIComponent(skill.name)}" class="skill-name-link" title="Click to practice ${skill.name}">
+                    ${skill.name}
+                  </a>
+                  <span class="skill-play-icon">▶ Practice</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter skills live via search input
+    const searchInput = document.getElementById('curriculumSearchInput');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        renderGrid(allLoadedCategories);
+        return;
+      }
+
+      const filtered = [];
+      allLoadedCategories.forEach(cat => {
+        const matchingSkills = (cat.skills || []).filter(s => 
+          s.name.toLowerCase().includes(query) || s.id.toLowerCase().includes(query)
+        );
+        if (matchingSkills.length > 0) {
+          filtered.push({
+            name: cat.name,
+            skills: matchingSkills
+          });
+        }
+      });
+
+      renderGrid(filtered);
+    });
+
+    loadCurriculumData(activeGrade);
+  </script>
+</body>
+</html>
+

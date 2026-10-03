@@ -3,200 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Edubull — Personalised learning from LKG to Class 12</title>
-  <meta name="description" content="Curriculum-aligned practice for LKG to Class 12 with instant feedback, hints and a SmartScore that grows with every answer.">
+  <title>Edubull — Playful learning for preschoolers</title>
+  <meta name="description" content="Edubull turns screen time into learning time with playful lessons in letters, numbers, shapes and stories for children aged 2–6.">
   <link rel="icon" href="/edubull-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/css/edubull.css">
-  <link rel="stylesheet" href="/css/home.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/landing.css">
 </head>
-<body class="home">
-  <header data-site-header></header>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="nav" class="nav"></header>
 
-  <main>
-    <!-- Hero: illustrated scene -->
-    <section class="scene">
-      <svg class="scene-art" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-        <!-- sun -->
-        <g class="float slow"><circle cx="300" cy="110" r="46" fill="#fde047"/>
-          <g stroke="#facc15" stroke-width="8" stroke-linecap="round">
-            <path d="M300 34v-18M300 204v-18M224 110h-18M394 110h-18M246 56l-12-12M366 176l-12-12M354 56l12-12M234 176l12-12"/></g></g>
-        <!-- clouds -->
-        <g fill="#fff" opacity=".9">
-          <g class="float"><ellipse cx="560" cy="80" rx="60" ry="22"/><ellipse cx="600" cy="66" rx="40" ry="26"/></g>
-          <g class="float slow"><ellipse cx="1130" cy="120" rx="70" ry="24"/><ellipse cx="1090" cy="104" rx="42" ry="26"/></g>
-        </g>
-        <!-- balloon -->
-        <g class="float">
-          <path d="M150 40c-46 0-70 34-70 64 0 40 50 74 62 92h16c12-18 62-52 62-92 0-30-24-64-70-64z" fill="#fb923c"/>
-          <path d="M150 40c-16 0-26 34-26 64 0 40 18 74 22 92h8c4-18 22-52 22-92 0-30-10-64-26-64z" fill="#facc15"/>
-          <path d="M142 196l-6 28M158 196l6 28" stroke="#7c2d12" stroke-width="2"/>
-          <rect x="132" y="222" width="36" height="24" rx="5" fill="#a16207"/>
-        </g>
-        <!-- paper plane -->
-        <g class="float slow" transform="translate(1220 70)">
-          <path d="M0 40L110 0 70 80 52 54z" fill="#fff" stroke="#0369a1" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M52 54L110 0" stroke="#0369a1" stroke-width="3"/>
-          <path d="M-10 60c-40 10-70 40-110 30" fill="none" stroke="#0369a1" stroke-width="3" stroke-dasharray="8 10" stroke-linecap="round"/>
-        </g>
-        <!-- hills -->
-        <path d="M0 400C200 330 380 360 560 400S960 330 1180 360 1440 380 1440 380V560H0z" fill="#86efac"/>
-        <path d="M0 450C240 400 420 470 700 440S1180 400 1440 440V560H0z" fill="#4ade80"/>
-        <!-- river -->
-        <path d="M640 560C680 500 760 480 720 440S780 410 820 400" fill="none" stroke="#7dd3fc" stroke-width="46" stroke-linecap="round"/>
-        <!-- trees -->
-        <g fill="#16a34a"><circle cx="90" cy="420" r="38"/><circle cx="1340" cy="410" r="44"/><circle cx="1260" cy="440" r="30"/></g>
-        <g fill="#854d0e"><rect x="86" y="450" width="8" height="40"/><rect x="1336" y="446" width="8" height="40"/></g>
-        <!-- books -->
-        <g transform="translate(1100 448)">
-          <rect width="150" height="22" rx="4" fill="#3b82f6"/><rect x="10" y="-22" width="130" height="22" rx="4" fill="#f97316"/>
-          <rect x="20" y="-44" width="110" height="22" rx="4" fill="#a855f7"/>
-        </g>
-        <!-- pencil -->
-        <g transform="translate(220 470) rotate(-18)">
-          <rect width="120" height="22" rx="3" fill="#facc15"/><rect x="-14" width="14" height="22" rx="3" fill="#f472b6"/>
-          <path d="M120 0l26 11-26 11z" fill="#fde68a"/><path d="M138 7l8 4-8 4z" fill="#334155"/>
-        </g>
-        <!-- flowers -->
-        <g fill="#fff"><circle cx="420" cy="520" r="7"/><circle cx="980" cy="500" r="7"/><circle cx="1400" cy="520" r="7"/></g>
-        <g fill="#facc15"><circle cx="420" cy="520" r="3"/><circle cx="980" cy="500" r="3"/><circle cx="1400" cy="520" r="3"/></g>
-      </svg>
-
-      <div class="wrap scene-inner">
-        <h1 class="scene-title"><b>edubull</b> is AI-enabled personalised learning</h1>
-        <div class="pills">
-          <div class="pill-card">
-            <h3>Comprehensive curriculum</h3>
-            <p>Skills for every class from LKG to Class 12, organised the way schools teach them.</p>
-          </div>
-          <div class="pill-card">
-            <h3>Learn at your pace</h3>
-            <p>Instant feedback and hints on every question, with no pressure and no timers.</p>
-          </div>
-          <div class="pill-card">
-            <h3>See real progress</h3>
-            <p>A SmartScore for each skill shows exactly what's mastered and what's next.</p>
-          </div>
-        </div>
-        <div class="tags" style="margin-bottom:26px"><span>Maths</span><span>English</span><span>Science</span><span>Hindi</span></div>
-        <a class="btn btn-fun" href="/signup.html">Become a member!</a>
-      </div>
-    </section>
-
-    <!-- Class cards -->
-    <section class="classes" id="classes">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Pick your class</h2>
-          <p class="muted">Every subject, every skill, matched to what's taught in school.</p>
-        </div>
-        <div class="class-grid" id="classGrid"></div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="how" id="how">
-      <div class="wrap how-grid">
-        <div class="how-card"><div class="n">1</div><h3>Choose a skill</h3><p>Browse by class and topic or search for this week's homework.</p></div>
-        <div class="how-card"><div class="n">2</div><h3>Practise & learn</h3><p>Answer questions, get a hint when stuck, and see why each answer is right.</p></div>
-        <div class="how-card"><div class="n">3</div><h3>Master it</h3><p>Your SmartScore climbs with each correct answer. Reach 100 to master the skill.</p></div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="quote">
-      <div class="wrap">
-        <div class="quote-card">
-          <h2>What parents say</h2>
-          <blockquote id="quoteText"></blockquote>
-          <cite id="quoteWho"></cite>
-          <div class="dots" id="quoteDots" role="tablist" aria-label="Testimonials"></div>
-        </div>
-      </div>
-    </section>
+  <main id="main">
+    <section id="hero" aria-label="Introduction"></section>
+    <section id="learn" aria-labelledby="learn-title"></section>
+    <section id="trust" aria-label="Why parents trust us"></section>
+    <section id="features" aria-label="Feature showcase"></section>
+    <section id="newsletter" aria-label="Newsletter"></section>
+    <section id="reviews" aria-label="Parent reviews"></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="foot-grid">
-        <div class="foot-about">
-          <a class="logo" href="/"><span class="logo-mark">eb</span>edubull</a>
-          <p>Edubull is an AI-enabled learning platform with curriculum-aligned practice for LKG to Class 12.</p>
-          <a class="btn btn-fun" style="font-size:1rem;padding:10px 28px" href="/signup.html">Join now</a>
-        </div>
-        <div><h4>Learn</h4><ul>
-          <li><a href="/class.html">Curriculum</a></li>
-          <li><a href="/app.html">Practice</a></li>
-          <li><a href="/#classes">Classes</a></li>
-        </ul></div>
-        <div><h4>Account</h4><ul>
-          <li><a href="/signup.html">Create account</a></li>
-          <li><a href="/login.html">Sign in</a></li>
-        </ul></div>
-        <div><h4>About</h4><ul>
-          <li><a href="/#how">How it works</a></li>
-          <li><a href="mailto:hello@edubull.com">Contact us</a></li>
-        </ul></div>
-      </div>
-      <div class="foot-bottom" id="year"></div>
-    </div>
-  </footer>
+  <footer id="footer"></footer>
 
-  <script type="module">
-    import '/js/ui/layout.js';
-    import { GRADES, gradeHue, esc } from '/js/ui/dom.js';
+  <dialog id="videoModal" class="modal" aria-label="Preview video">
+    <button class="modal-close" data-close aria-label="Close">×</button>
+    <div id="videoBody"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    const ABOUT = {
-      'lkg': 'Counting objects, big and small, shapes, colours, letter names and rhymes.',
-      'ukg': 'Numbers to 20, first sums, patterns, sight words and vowel sounds.',
-      'class-1': 'Adding and subtracting, tens and ones, nouns, verbs and telling time.',
-      'class-2': 'Place value, shapes, patterns, contractions, plurals and pronouns.',
-      'class-3': 'Multiplication, measurement, comparing numbers and using a dictionary.',
-      'class-4': 'Fractions, multiplication, time, synonyms, antonyms and homophones.',
-      'class-5': 'Area, perimeter, equivalent fractions, angles and compound sentences.',
-      'class-6': 'Integers, multiples, adding fractions, ratios and complex sentences.',
-      'class-7': 'Rational numbers, proportional relationships, phrases and clauses.',
-      'class-8': 'Linear equations, exponents, geometry proofs and active voice.',
-      'class-9': 'Polynomials, coordinate geometry, matter and motion.',
-      'class-10': 'Quadratics, trigonometry, statistics, light and electricity.',
-      'class-11': 'Sets, functions, limits, kinematics and organic chemistry.',
-      'class-12': 'Calculus, vectors, probability, electrostatics and genetics.'
-    };
-    const subjectsFor = key =>
-      key === 'lkg' || key === 'ukg' ? ['English', 'General Awareness', 'Hindi']
-      : /class-[1-5]$/.test(key) ? ['English', 'Science & EVS', 'Hindi']
-      : ['English', 'Science', 'Social Studies'];
-
-    // Maths is live; other subjects are listed as coming soon.
-    document.getElementById('classGrid').innerHTML = GRADES.map(g => `
-      <article class="class-card">
-        <header><span class="grade-badge ${gradeHue(g.key)}">${esc(g.badge)}</span><h3>${esc(g.label)}</h3></header>
-        <p>${esc(ABOUT[g.key])}</p>
-        <a class="subject-row" href="/class.html?grade=${g.key}">Maths <em>Practise ›</em></a>
-        ${subjectsFor(g.key).map(s => `<div class="subject-row soon">${esc(s)} <em>Coming soon</em></div>`).join('')}
-      </article>`).join('');
-
-    // Sample quotes for layout. Replace with real, permissioned parent feedback before launch.
-    const QUOTES = [
-      { text: 'She practises on Edubull almost every day. The way skills are grouped by topic makes it easy to see what she needs to work on next.', who: 'Parent of a Class 2 student' },
-      { text: 'The hints are the best part. He works it out himself instead of just being given the answer.', who: 'Parent of a Class 4 student' },
-      { text: 'Watching the SmartScore go up keeps my daughter motivated far more than worksheets ever did.', who: 'Parent of a UKG student' }
-    ];
-    const dots = document.getElementById('quoteDots');
-    let qi = 0, timer;
-    function showQuote(i) {
-      qi = i;
-      document.getElementById('quoteText').textContent = `“${QUOTES[i].text}”`;
-      document.getElementById('quoteWho').textContent = QUOTES[i].who;
-      dots.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-current', j === i));
-    }
-    dots.innerHTML = QUOTES.map((_, i) => `<button aria-label="Show testimonial ${i + 1}"></button>`).join('');
-    dots.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => { clearInterval(timer); showQuote(i); }));
-    showQuote(0);
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      timer = setInterval(() => showQuote((qi + 1) % QUOTES.length), 7000);
-    }
-
-    document.getElementById('year').textContent = `© ${new Date().getFullYear()} Edubull Learning. All rights reserved.`;
-  </script>
+  <script type="module" src="/js/landing/main.js"></script>
 </body>
 </html>

@@ -3,17 +3,17 @@ import { CONFIG } from '../config.js';
 
 // High-speed fallback dataset for offline or static CDN serving
 const LOCAL_SKILLS_INDEX = [
-  { id: "m-lkg", title: "Count to 10 with objects", grade: "LKG & UKG", category: "Maths", url: "/maths" },
-  { id: "m-c1", title: "Addition up to 20", grade: "Class 1", category: "Maths", url: "/maths" },
-  { id: "m-c3", title: "Multiplication tables (2 to 12)", grade: "Class 3", category: "Maths", url: "/maths" },
-  { id: "m-c5", title: "Fractions & Decimals basics", grade: "Class 5", category: "Maths", url: "/maths" },
-  { id: "m-c8", title: "Linear Equations in One Variable", grade: "Class 8", category: "Maths", url: "/maths" },
-  { id: "m-c10", title: "Quadratic Equations & Polynomials", grade: "Class 10", category: "Maths", url: "/maths" },
-  { id: "m-c12", title: "Trigonometry & Calculus Intro", grade: "Class 11 & 12", category: "Maths", url: "/maths" },
-  { id: "e-c4", title: "Parts of Speech & Grammar rules", grade: "Class 4", category: "English", url: "/english" },
-  { id: "e-c6", title: "Reading Comprehension & Vocabulary", grade: "Class 6", category: "English", url: "/english" },
-  { id: "s-c9", title: "Matter & States of Matter", grade: "Class 9", category: "Science", url: "/science" },
-  { id: "s-c7", title: "Force, Motion & Energy", grade: "Class 7", category: "Science", url: "/science" }
+  { id: "m-lkg", title: "Count to 10 with objects", grade: "LKG & UKG", category: "Maths", url: "/class.html" },
+  { id: "m-c1", title: "Addition up to 20", grade: "Class 1", category: "Maths", url: "/class.html" },
+  { id: "m-c3", title: "Multiplication tables (2 to 12)", grade: "Class 3", category: "Maths", url: "/class.html" },
+  { id: "m-c5", title: "Fractions & Decimals basics", grade: "Class 5", category: "Maths", url: "/class.html" },
+  { id: "m-c8", title: "Linear Equations in One Variable", grade: "Class 8", category: "Maths", url: "/class.html" },
+  { id: "m-c10", title: "Quadratic Equations & Polynomials", grade: "Class 10", category: "Maths", url: "/class.html" },
+  { id: "m-c12", title: "Trigonometry & Calculus Intro", grade: "Class 11 & 12", category: "Maths", url: "/class.html" },
+  { id: "e-c4", title: "Parts of Speech & Grammar rules", grade: "Class 4", category: "English", url: "/class.html" },
+  { id: "e-c6", title: "Reading Comprehension & Vocabulary", grade: "Class 6", category: "English", url: "/class.html" },
+  { id: "s-c9", title: "Matter & States of Matter", grade: "Class 9", category: "Science", url: "/class.html" },
+  { id: "s-c7", title: "Force, Motion & Energy", grade: "Class 7", category: "Science", url: "/class.html" }
 ];
 
 export const searchApi = {
